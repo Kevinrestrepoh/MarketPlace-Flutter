@@ -41,4 +41,36 @@ class Api {
       throw Exception('Error trying get posts: $e');
     }
   }
+
+  Future<User> getUser(String? id) async{
+    final url = Uri.parse('$_baseUrl/users/$id');
+    try{
+      final response = await http.get(url);
+
+      if (response.statusCode == 200){
+        final jsonData = json.decode(response.body);
+        return User.fromJson(jsonData);
+      } else {
+        throw Exception('Failed to get user: ${response.statusCode}');
+      }
+    }catch(e){
+      throw Exception('Error trying get user: $e');
+    }
+  }
+
+    Future<List<Post>> getUserPosts(String? id) async{
+    final url = Uri.parse('$_baseUrl/users/posts/$id');
+    try{
+      final response = await http.get(url);
+
+      if (response.statusCode == 200){
+        final List<dynamic> jsonData = json.decode(response.body);
+        return jsonData.map((post) => Post.fromJson(post)).toList();
+      } else {
+        throw Exception('Failed to load user posts: ${response.statusCode}');
+      }
+    }catch(e){
+      throw Exception('Error trying get user posts: $e');
+    }
+  }
 }

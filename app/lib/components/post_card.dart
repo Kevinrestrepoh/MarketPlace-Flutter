@@ -1,4 +1,5 @@
 import 'package:app/models/post_model.dart';
+import 'package:app/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 
 class PostCard extends StatelessWidget {
@@ -19,24 +20,27 @@ class PostCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                Container(
-                  width: 30,
-                  height: 30,
-                  decoration: BoxDecoration(
-                    color: Colors.grey,
-                    shape: BoxShape.circle
+            GestureDetector(
+              onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfilePage(id: post.userId.id)));},
+              child: Row(
+                children: [
+                  Container(
+                    width: 30,
+                    height: 30,
+                    decoration: BoxDecoration(
+                      color: Colors.grey,
+                      shape: BoxShape.circle
+                    ),
                   ),
-                ),
-                SizedBox(width: 10,),
-                Text(post.userId.name, style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),)
-              ],
+                  SizedBox(width: 10,),
+                  Text(post.userId.name, style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),)
+                ],
+              ),
             ),
             SizedBox(height: 8,),
-            Text(post.title, style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18), maxLines: 4, overflow: TextOverflow.ellipsis,),
+            Text(post.title, style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18), maxLines: 2, overflow: TextOverflow.ellipsis,),
             SizedBox(height: 5,),
-            Text(post.description, maxLines: 8,),
+            Text(post.description, maxLines: 8, overflow: TextOverflow.ellipsis,),
             SizedBox(height: 5,),
             Text('\$${post.price.toStringAsFixed(2)}', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),),
             SizedBox(height: 10,),

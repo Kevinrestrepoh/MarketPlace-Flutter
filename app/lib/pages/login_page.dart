@@ -1,7 +1,7 @@
 import 'package:app/api/api.dart';
 import 'package:app/components/button.dart';
 import 'package:app/components/text_field.dart';
-import 'package:app/pages/home_page.dart';
+import 'package:app/pages/app_page.dart';
 import 'package:app/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -40,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
       final user = await api.login(email, password);
       if(mounted){
         context.read<UserProvider>().setUser(user: user);
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomePage()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>AppPage()));
       }
     } catch (e) {
       setState(() {
