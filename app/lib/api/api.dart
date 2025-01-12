@@ -42,6 +42,23 @@ class Api {
     }
   }
 
+  Future addPost(Post p) async{
+    final url = Uri.parse('$_baseUrl/posts');
+    try{
+      final postJson = p.toJson();
+      final response = await http.post(url, headers: {'Content-Type': 'application/json',}, body: json.encode(postJson));
+
+      if (response.statusCode == 201){
+        final jsonData = json.decode(response.body);
+        return Post.fromJson(jsonData);
+      } else {
+        throw Exception('Failed to add post: ${response.statusCode}');
+      }
+    }catch(e){
+      throw Exception('Error trying to add post: $e');
+    }
+  }
+
   Future<User> getUser(String? id) async{
     final url = Uri.parse('$_baseUrl/users/$id');
     try{
@@ -58,7 +75,7 @@ class Api {
     }
   }
 
-    Future<List<Post>> getUserPosts(String? id) async{
+  Future<List<Post>> getUserPosts(String? id) async{
     final url = Uri.parse('$_baseUrl/users/posts/$id');
     try{
       final response = await http.get(url);

@@ -7,7 +7,10 @@ class MyTextField extends StatelessWidget {
   final Icon? icon;
   final BoxDecoration? anim;
   final bool? activeAnim;
-  const MyTextField({super.key, this.controller, required this.hintText, this.obscureText, this.icon, this.anim, this.activeAnim});
+  final int? minLines;
+  final int? maxLines;
+  final TextInputType? textInputType;
+  const MyTextField({super.key, this.controller, required this.hintText, this.obscureText, this.icon, this.anim, this.activeAnim, this.minLines, this.maxLines = 1, this.textInputType});
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +22,9 @@ class MyTextField extends StatelessWidget {
       child: TextField(
         controller: controller,
         obscureText: obscureText ?? false,
+        minLines: minLines,
+        maxLines: maxLines,
+        keyboardType: textInputType,
         decoration: InputDecoration(
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),

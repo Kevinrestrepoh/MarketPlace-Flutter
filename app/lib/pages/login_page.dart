@@ -96,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                   SizedBox(height: 15,),
-                  MyButton(onTap: _login,),
+                  MyButton(onTap: _login, text: 'Sign In',),
                   SizedBox(height: 50,),
                   Row(
                     children: [
